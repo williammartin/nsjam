@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+ginkgo -tags daemon -r -p -race -cover -keepGoing -nodes=1 "$@"

@@ -1,0 +1,9 @@
+package: github.com/williammartin/nsjam
+import:
+- package: github.com/jessevdk/go-flags
+testImport:
+- package: github.com/onsi/ginkgo
+- package: github.com/onsi/gomega
+  subpackages:
+  - gbytes
+  - gexec
