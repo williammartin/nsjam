@@ -41,6 +41,14 @@ var _ = Describe("ListNamespaces", func() {
 			It("prints the name of the process", func() {
 				Eventually(session.Out).Should(gbytes.Say("sleep"))
 			})
+
+			It("prints the namespace inodes", func() {
+				Expect(string(session.Wait().Out.Contents())).To(MatchRegexp(`mnt:\d+`))
+				Expect(string(session.Wait().Out.Contents())).To(MatchRegexp(`user:\d+`))
+				Expect(string(session.Wait().Out.Contents())).To(MatchRegexp(`ipc:\d+`))
+				Expect(string(session.Wait().Out.Contents())).To(MatchRegexp(`pid:\d+`))
+				Expect(string(session.Wait().Out.Contents())).To(MatchRegexp(`net:\d+`))
+			})
 		})
 	})
 

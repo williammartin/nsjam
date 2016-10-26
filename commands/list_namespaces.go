@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	ps "github.com/mitchellh/go-ps"
+	"github.com/williammartin/nsodyssey"
 )
 
 type ListNamespaces struct {
@@ -17,5 +18,12 @@ func (command *ListNamespaces) Execute(args []string) error {
 	}
 
 	fmt.Println(process.Executable())
+
+	namespaces, _ := nsodyssey.Namespaces(command.Pid)
+
+	for ns, inode := range namespaces {
+		fmt.Printf("%s:%s\n", ns, inode)
+	}
+
 	return nil
 }

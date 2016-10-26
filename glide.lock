@@ -1,10 +1,12 @@
 hash: 57d8fb2514a310c9548e51a8af68bf3e1925fb46201f08de3a0a36f64fee0027
-updated: 2016-10-26T15:55:25.006232215+01:00
+updated: 2016-10-26T18:45:20.643068483+01:00
 imports:
 - name: github.com/jessevdk/go-flags
   version: 0648c820cd4e564706597268ae2d2c7d9e6900c6
 - name: github.com/mitchellh/go-ps
   version: e2d21980687ce16e58469d98dcee92d27fbbd7fb
+- name: github.com/williammartin/nsodyssey
+  version: 2e725297556775baca483531deaa464948e0714b
 testImports:
 - name: github.com/onsi/ginkgo
   version: a8ccd817611666211fdf6e6a752174a0db8374a8
