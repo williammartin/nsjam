@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cfgarden/golang-ci
+    tag: '0.2.0'
+
+inputs:
+- name: nsjam
+  path: gopath/src/github.com/williammartin/nsjam
+
+params:
+
+run:
+  path: gopath/src/github.com/williammartin/nsjam/ci/scripts/marley

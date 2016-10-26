@@ -2,4 +2,12 @@
 
 set -e
 
-ginkgo -tags daemon -r -p -race -cover -keepGoing -nodes=1 "$@"
+ARGS=$@
+
+DIRS=$(for d in $ARGS; do [ -d "$d" ] && echo "$d"; done)
+
+if egrep -q marley <(echo "$ARGS"); then
+   (./scripts/remote-fly ci/marley.yml -- $ARGS)
+else
+  ginkgo -race $ARGS
+fi

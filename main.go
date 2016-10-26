@@ -19,6 +19,7 @@ func main() {
 
 	commands := []command{
 		{"version", "returns the semantic version in use", &commands.Version{}},
+		{"list-namespaces", "lists the namespaces for a process", &commands.ListNamespaces{}},
 	}
 
 	for _, command := range commands {
