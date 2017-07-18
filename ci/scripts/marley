@@ -5,11 +5,5 @@ export GOPATH=$PWD/gopath
 export PATH=$GOPATH/bin:$PATH
 mkdir $GOPATH/bin
 
-curl https://glide.sh/get | sh
-
 cd $GOPATH/src/github.com/williammartin/nsjam
-glide install
-
-go vet $(glide novendor)
 ginkgo -tags daemon -r -p -race -cover -keepGoing -nodes=1 "$@"
-
