@@ -8,9 +8,9 @@ shift
 if [ -z $REMOTE_ATC_URL ]; then
   fly -t lite sync
   fly -t lite login -c http://192.168.100.4:8080
-  fly -t lite e -x -p -i nsjam=. -c $build_yml $@
+  fly -t lite e -x -i nsjam=. -c $build_yml $@
 else
   fly --target $REMOTE_ATC_URL sync
-  fly --target $REMOTE_ATC_URL e -x -p -i nsjam=. -c $build_yml $@
+  fly --target $REMOTE_ATC_URL e -x -i nsjam=. -c $build_yml $@
 fi
 

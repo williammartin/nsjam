@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	ps "github.com/mitchellh/go-ps"
 	"github.com/urfave/cli"
@@ -41,6 +42,13 @@ var ListNamespaces = cli.Command{
 	Action: func(ctx *cli.Context) error {
 		process, _ := ps.FindProcess(ctx.Int("target"))
 		fmt.Println(process.Executable())
+
+		pidNS, _ := getPidNS(process.Pid())
+		fmt.Println(strings.TrimSpace(pidNS))
 		return nil
 	},
+}
+
+func getPidNS(pid int) (string, error) {
+	return os.Readlink(fmt.Sprintf("/proc/%d/ns/pid", pid))
 }

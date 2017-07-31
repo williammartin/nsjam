@@ -1,4 +1,4 @@
-package cqt_test
+package marley_test
 
 import (
 	. "github.com/onsi/ginkgo"

@@ -1,8 +1,11 @@
-package cqt_test
+package marley_test
 
 import (
+	"fmt"
+	"os"
 	"os/exec"
 	"strconv"
+	"strings"
 	"syscall"
 
 	. "github.com/onsi/ginkgo"
@@ -48,8 +51,15 @@ var _ = Describe("ListNamespaces", func() {
 			Eventually(session).Should(gbytes.Say("sleep"))
 		})
 
-		// It("prints out the pid namespace of the target", func() {
-		// 	Expect(string(session.Wait().Out.Contents())).To(MatchRegexp(`mnt:\d+`))
-		// })
+		It("prints out the pid namespace of the target", func() {
+			Expect(string(session.Wait().Out.Contents())).To(ContainSubstring(parsePidNS(cmd.Process.Pid)))
+		})
 	})
 })
+
+func parsePidNS(pid int) string {
+	pidNS, err := os.Readlink(fmt.Sprintf("/proc/%d/ns/pid", pid))
+	Expect(err).NotTo(HaveOccurred())
+
+	return strings.TrimSpace(pidNS)
+}

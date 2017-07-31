@@ -1,4 +1,4 @@
-package cqt_test
+package marley_test
 
 import (
 	"os/exec"
@@ -27,7 +27,7 @@ var _ = AfterSuite(func() {
 var execNSJam = func(args ...string) *gexec.Session {
 	cmd := exec.Command(nsjamBinPath, args...)
 	session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
-	Expect(err).ToNot(HaveOccurred())
+	Expect(err).NotTo(HaveOccurred())
 	return session
 }
 
