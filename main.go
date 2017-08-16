@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -40,10 +41,22 @@ var ListNamespaces = cli.Command{
 		},
 	},
 	Action: func(ctx *cli.Context) error {
-		process, _ := ps.FindProcess(ctx.Int("target"))
+		if ctx.Int("target") == 0 {
+			return errors.New("Must pass a target pid")
+		}
+
+		process, err := ps.FindProcess(ctx.Int("target"))
+		if process == nil && err == nil {
+			return errors.New("Must pass a valid pid")
+		}
+
 		fmt.Println(process.Executable())
 
-		pidNS, _ := getPidNS(process.Pid())
+		pidNS, err := getPidNS(process.Pid())
+		if err != nil {
+			return err
+		}
+
 		fmt.Println(strings.TrimSpace(pidNS))
 		return nil
 	},
